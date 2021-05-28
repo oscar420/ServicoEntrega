@@ -47,6 +47,8 @@ public class Entrega {
 	@ManyToOne
 	private Cliente cliente;
 	
+	@Valid
+	@javax.validation.constraints.NotNull
 	@Embedded
 	private Destinatario destinatario;
 	
