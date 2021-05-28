@@ -16,7 +16,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 
+import com.algaworks.algalog.domain.ValidationGroups;
 import com.algaworks.algalog.domain.exception.NegocioException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -37,14 +41,16 @@ public class Entrega {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@Valid
+	@ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class)
+	@javax.validation.constraints.NotNull
 	@ManyToOne
 	private Cliente cliente;
 	
 	@Embedded
 	private Destinatario destinatario;
 	
-	@NotNull
+	@javax.validation.constraints.NotNull
 	private BigDecimal taxa;
 	
 	//@OneToMany(mappedBy = "entrega", cascade = CascadeType.ALL)
